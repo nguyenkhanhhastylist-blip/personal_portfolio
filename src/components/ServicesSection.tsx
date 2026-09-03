@@ -9,11 +9,11 @@ const SERVICES = [
       desc: 'Mỗi bức ảnh là một câu chuyện — mình mang đến phong cách độc đáo, phù hợp với concept và nhân vật, giúp tạo nên hình ảnh ấn tượng và nhất quán.',
     },
     en: {
-      title: 'Photoshoot & Collaboration',
+      title: 'Photoshoot and Collaboration',
       desc: 'Every image tells a story. I bring a distinct visual language to each shoot — curating looks that speak to the concept and elevate the final result.',
     },
     image:
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=900&fit=crop&auto=format',
+      'https://images.squarespace-cdn.com/content/v1/695425dfd628253995fd3971/38d25461-5025-4612-9eff-55b969b9ce8c/pexels-ron-lach-7778884.jpg',
   },
   {
     id: 'mv',
@@ -22,7 +22,7 @@ const SERVICES = [
       desc: 'Hợp tác với nghệ sĩ và đội ngũ sản xuất để xây dựng hình ảnh nhân vật từ ý tưởng đến hiện thực — sáng tạo, chuyên nghiệp và đúng deadline.',
     },
     en: {
-      title: 'Music Video & Commercial',
+      title: 'Music Video and Commercial',
       desc: 'Working closely with artists and production teams to build character looks from concept to execution — creative, precise, and always on schedule.',
     },
     image:
@@ -48,7 +48,7 @@ const SERVICES = [
       desc: 'Giúp bạn tìm ra phong cách riêng — từ việc chọn trang phục phù hợp vóc dáng, đến xây dựng tủ đồ capsule thể hiện đúng cá tính của bạn.',
     },
     en: {
-      title: 'Personal Styling & Consultation',
+      title: 'Personal Styling and Consultation',
       desc: 'Helping you define your personal style — from selecting silhouettes that work for your figure, to building a capsule wardrobe that feels authentically you.',
     },
     image:
@@ -61,7 +61,7 @@ const SERVICES = [
       desc: 'Tư vấn và mua sắm cùng bạn — từ xác định nhu cầu, lựa chọn item phù hợp đến hoàn thiện những outfit thực tế cho phong cách cá nhân.',
     },
     en: {
-      title: 'Personal Styling & Shopping',
+      title: 'Personal Styling and Shopping',
       desc: 'Shopping together with you — from identifying your needs and selecting the right pieces to completing real outfits for your personal style.',
     },
     image:
@@ -74,11 +74,11 @@ const SERVICES = [
       desc: 'Định hướng tạo dáng, biểu cảm và ngôn ngữ hình thể, kết hợp art direction để xây dựng hình ảnh đúng concept và tinh thần thương hiệu.',
     },
     en: {
-      title: 'Posing & Art Direction',
+      title: 'Posing and Art Direction',
       desc: 'Directing poses, expressions and body language, combined with art direction to build visuals that align with the concept and brand identity.',
     },
     image:
-      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=900&fit=crop&auto=format',
+      'https://images.squarespace-cdn.com/content/v1/695425dfd628253995fd3971/38d25461-5025-4612-9eff-55b969b9ce8c/pexels-ron-lach-7778884.jpg',
   },
 ]
 

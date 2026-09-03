@@ -16,7 +16,7 @@ export default function Hero({ profile }: Props) {
     <section id="about" className="relative grid grid-cols-1 lg:grid-cols-[1fr_0.92fr] min-h-[min(88vh,860px)] bg-cream">
       {/* Text — left column / overlay on mobile */}
       <div className="relative z-10 flex flex-col justify-end lg:justify-center px-[clamp(20px,4vw,64px)] pb-[clamp(48px,8vw,110px)] pt-[clamp(48px,8vw,110px)] min-h-[min(88vh,860px)] lg:min-h-0 order-2 lg:order-1">
-        <h1 className="font-ui font-semibold text-[clamp(36px,5.5vw,76px)] text-cream lg:text-ink tracking-[-0.02em] leading-[1.08] mb-8 uppercase">
+        <h1 className="font-ui font-semibold text-[clamp(28px,4vw,58px)] text-cream lg:text-ink tracking-[-0.02em] leading-[1.08] mb-8 uppercase">
           {lang === 'vi' ? (
             <>Phong cách<br /><span className="mt-2 block">& dấu ấn.</span></>
           ) : (

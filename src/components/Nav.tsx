@@ -65,7 +65,7 @@ export default function Nav({ profile, onLoginClick, isAuthed, hideLinks = false
           onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           className="font-ui font-medium text-[12px] tracking-[0.26em] uppercase text-ink-soft hover:text-ink transition-colors duration-300 whitespace-nowrap"
         >
-          {profileName(profile, lang)}
+          {profileName(profile, lang)}{profile.nickname ? ` (${profile.nickname})` : ''}
         </button>
 
         {/* Desktop links */}
