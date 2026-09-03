@@ -1,0 +1,1 @@
+bỏ mấy cái button phía trên đi mình muốn show toàn bộ nhưng có ngăn cách ak 
