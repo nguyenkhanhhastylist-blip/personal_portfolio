@@ -1,3 +1,1 @@
-mình muốn admin có thể tự thêm xóa sửa luôn ak
-
-và kiến trúc còn lại bạn làm như thế nào đó chobaor mật nhất đi ak
+bỏ mấy cái button phía trên đi mình muốn show toàn bộ nhưng có ngăn cách ak 

@@ -10,7 +10,11 @@ export const DICT = {
     navAbout: 'Giới thiệu',
     navServices: 'Dịch vụ',
     navPortfolio: 'Portfolio',
+<<<<<<< HEAD
     navArtists: 'Nghệ sĩ',
+=======
+    navArtists: 'Dự án',
+>>>>>>> backup-local
     navContact: 'Liên hệ',
     login: 'Đăng nhập',
     dashboard: 'Quản trị',
@@ -124,7 +128,7 @@ export const DICT = {
     navAbout: 'About',
     navServices: 'Services',
     navPortfolio: 'Portfolio',
-    navArtists: 'Artists',
+    navArtists: 'Projects',
     navContact: 'Contact',
     login: 'Login',
     dashboard: 'Dashboard',

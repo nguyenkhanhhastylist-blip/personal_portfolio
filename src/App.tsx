@@ -1,5 +1,5 @@
-import { useState, useCallback, useMemo, useEffect } from 'react'
-import { onAuthStateChanged, signInWithPopup, signOut } from 'firebase/auth'
+import { useState, useCallback, useMemo, useEffect, useRef } from 'react'
+import { onAuthStateChanged, signInWithRedirect, getRedirectResult, signOut } from 'firebase/auth'
 import type { User } from 'firebase/auth'
 import {
   collection,
@@ -16,8 +16,13 @@ import { DICT, LangContext, getStoredLang, storeLang } from './i18n'
 import type { Lang, TKey, Dict } from './i18n'
 import Nav from './components/Nav'
 import Hero from './components/Hero'
+<<<<<<< HEAD
 import ServicesSection from './components/ServicesSection'
 import PortfolioSection from './components/PortfolioSection'
+=======
+import PortfolioSection from './components/PortfolioSection'
+import ServicesSection from './components/ServicesSection'
+>>>>>>> backup-local
 import ContactSection from './components/ContactSection'
 import Lightbox from './components/Lightbox'
 import LoginPage from './components/LoginPage'
@@ -35,6 +40,10 @@ export default function App() {
   const [dataLoading, setDataLoading] = useState(true)
   const [lang, setLangState] = useState<Lang>(getStoredLang)
   const [selectedProject, setSelectedProject] = useState<Project | null>(() => null)
+<<<<<<< HEAD
+=======
+  const revealInitialized = useRef(false)
+>>>>>>> backup-local
 
   const authed = user?.email === ADMIN_EMAIL
 
@@ -46,6 +55,21 @@ export default function App() {
     })
   }, [])
 
+<<<<<<< HEAD
+=======
+  // Handle redirect result after Google sign-in
+  useEffect(() => {
+    getRedirectResult(auth).then(result => {
+      if (!result) return
+      if (result.user.email === ADMIN_EMAIL) {
+        setPage('admin')
+      } else {
+        signOut(auth)
+      }
+    }).catch(() => {})
+  }, [])
+
+>>>>>>> backup-local
   // Firestore listeners
   useEffect(() => {
     let seeded = false
@@ -115,6 +139,7 @@ export default function App() {
     document.documentElement.lang = lang
   }, [lang])
 
+<<<<<<< HEAD
   // Scroll-reveal animation
   useEffect(() => {
     if (page !== 'home') return
@@ -137,6 +162,30 @@ export default function App() {
     }
     const cleanup = init()
     return cleanup
+=======
+  // Scroll-reveal animation — only initialize once after data first loads
+  useEffect(() => {
+    if (page !== 'home') return
+    if (dataLoading) return
+    if (revealInitialized.current) return
+    revealInitialized.current = true
+
+    const els = document.querySelectorAll('[data-reveal]')
+    if (!els.length) return
+    const observer = new IntersectionObserver(
+      entries => {
+        entries.forEach(e => {
+          if (e.isIntersecting) {
+            e.target.classList.add('is-visible')
+            observer.unobserve(e.target)
+          }
+        })
+      },
+      { threshold: 0.1 },
+    )
+    els.forEach(el => observer.observe(el))
+    return () => observer.disconnect()
+>>>>>>> backup-local
   }, [page, dataLoading])
 
   const langValue = useMemo(
@@ -150,10 +199,14 @@ export default function App() {
 
   // ── Firebase auth actions ──
   const handleGoogleLogin = useCallback(async () => {
+<<<<<<< HEAD
     const result = await signInWithPopup(auth, googleProvider)
     if (result.user.email === ADMIN_EMAIL) {
       setPage('admin')
     }
+=======
+    await signInWithRedirect(auth, googleProvider)
+>>>>>>> backup-local
   }, [])
 
   const handleLogout = useCallback(async () => {
@@ -220,10 +273,18 @@ export default function App() {
           profile={profile}
           onLoginClick={() => (authed ? setPage('admin') : setPage('login'))}
           isAuthed={authed}
+<<<<<<< HEAD
         />
         <Hero profile={profile} />
         <ServicesSection />
         <PortfolioSection projects={projects} categories={categories} onProjectClick={setSelectedProject} />
+=======
+          hideLinks={!!selectedProject}
+        />
+        <Hero profile={profile} />
+        <PortfolioSection projects={projects} categories={categories} onProjectClick={setSelectedProject} />
+        <ServicesSection />
+>>>>>>> backup-local
         <ContactSection profile={profile} />
         {selectedProject && (
           <Lightbox project={selectedProject} categories={categories} onClose={() => setSelectedProject(null)} />

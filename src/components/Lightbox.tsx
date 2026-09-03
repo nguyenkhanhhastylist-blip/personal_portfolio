@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import type { Project, CategoryDef } from '../store'
 import { getCategoryLabel, projectTitle, projectDescription } from '../store'
 import { useLang } from '../i18n'
@@ -18,6 +18,8 @@ export default function Lightbox({ project, categories, onClose }: Props) {
   const [playing, setPlaying] = useState(false)
   const [imgLoaded, setImgLoaded] = useState(false)
   const [zoomed, setZoomed] = useState(false)
+  const pointerStartX = useRef<number | null>(null)
+  const isDragging = useRef(false)
 
   const youtubeId = project.youtubeUrl ? extractYoutubeId(project.youtubeUrl) : null
   const imgCount = project.images.length
@@ -40,6 +42,36 @@ export default function Lightbox({ project, categories, onClose }: Props) {
     goTo((current + 1) % totalSlides)
   }, [totalSlides, current, goTo])
 
+  const handleTouchStart = (e: React.TouchEvent) => {
+    if (isVideoSlide) return
+    pointerStartX.current = e.touches[0].clientX
+    isDragging.current = false
+  }
+  const handleTouchEnd = (e: React.TouchEvent) => {
+    if (pointerStartX.current === null) return
+    const delta = e.changedTouches[0].clientX - pointerStartX.current
+    pointerStartX.current = null
+    if (Math.abs(delta) < 30) return
+    isDragging.current = true
+    if (delta > 0) prev()
+    else next()
+  }
+  const handlePointerDown = (e: React.PointerEvent) => {
+    if (isVideoSlide || e.pointerType === 'touch') return
+    pointerStartX.current = e.clientX
+    isDragging.current = false
+  }
+  const handlePointerUp = (e: React.PointerEvent) => {
+    if (isVideoSlide || e.pointerType === 'touch') return
+    if (pointerStartX.current === null) return
+    const delta = e.clientX - pointerStartX.current
+    pointerStartX.current = null
+    if (Math.abs(delta) < 30) return
+    isDragging.current = true
+    if (delta > 0) prev()
+    else next()
+  }
+
   useEffect(() => {
     const handler = (e: KeyboardEvent) => {
       if (e.key === 'Escape') { if (zoomed) setZoomed(false); else onClose() }
@@ -58,8 +90,8 @@ export default function Lightbox({ project, categories, onClose }: Props) {
   const description = projectDescription(project, lang)
 
   return (
-    <div className="fixed inset-0 z-[100] bg-cream/98 backdrop-blur-sm animate-fade-in" onClick={onClose}>
-      <div className="h-full flex flex-col lg:flex-row" onClick={e => e.stopPropagation()}>
+    <div className="fixed inset-0 z-40 bg-cream/98 backdrop-blur-sm animate-fade-in" onClick={onClose}>
+      <div className="h-full flex flex-col sm:flex-row pt-16" onClick={e => e.stopPropagation()}>
         {/* ── Main panel ── */}
         <div className="flex-1 flex flex-col min-h-0">
           {/* Back button — always in flow, not absolute */}
@@ -75,7 +107,11 @@ export default function Lightbox({ project, categories, onClose }: Props) {
               Back
             </button>
           </div>
-          <div className="relative flex-1 flex items-center justify-center px-6 pb-6 lg:px-10 lg:pb-10 min-h-0">
+          <div
+            className="relative flex-1 flex items-center justify-center px-6 pb-6 lg:px-10 lg:pb-10 min-h-0"
+            onTouchStart={handleTouchStart}
+            onTouchEnd={handleTouchEnd}
+          >
           {/* Prev arrow */}
           {totalSlides > 1 && (
             <button
@@ -90,10 +126,14 @@ export default function Lightbox({ project, categories, onClose }: Props) {
           )}
 
           {/* Content */}
-          <div className="relative h-full max-w-full flex items-center justify-center w-full">
+          <div
+            className={`relative h-full max-w-full flex items-center justify-center w-full select-none ${!isVideoSlide && totalSlides > 1 ? 'cursor-grab active:cursor-grabbing' : ''}`}
+            onPointerDown={handlePointerDown}
+            onPointerUp={handlePointerUp}
+          >
             {isVideoSlide ? (
               /* Video slide — wrapper size never changes; iframe overlays thumbnail */
-              <div className="relative w-full aspect-video overflow-hidden shadow-[0_10px_40px_rgba(58,47,24,0.22)]">
+              <div className="relative w-full aspect-video max-h-[45vh] lg:max-h-[60vh] overflow-hidden shadow-[0_10px_40px_rgba(58,47,24,0.22)]">
                 {/* Thumbnail layer — always in DOM, hidden when playing */}
                 <div
                   className={`absolute inset-0 cursor-pointer group transition-opacity duration-300 ${playing ? 'opacity-0 pointer-events-none' : 'opacity-100'}`}
@@ -146,13 +186,14 @@ export default function Lightbox({ project, categories, onClose }: Props) {
                   key={current}
                   src={project.images[current]}
                   alt={`${projectTitle(project, lang)} — ${current + 1}`}
-                  className="max-h-full max-w-full object-contain animate-fade-in shadow-[0_10px_40px_rgba(58,47,24,0.18)] cursor-pointer"
+                  className="max-h-full max-w-full object-contain animate-fade-in shadow-[0_10px_40px_rgba(58,47,24,0.18)]"
+                  draggable={false}
                   onLoad={() => setImgLoaded(true)}
                   onError={e => {
                     ;(e.target as HTMLImageElement).src = FALLBACK_IMAGE
                     setImgLoaded(true)
                   }}
-                  onClick={() => setZoomed(true)}
+                  onClick={() => { if (!isDragging.current) setZoomed(true) }}
                 />
               </div>
             ) : (
@@ -194,8 +235,8 @@ export default function Lightbox({ project, categories, onClose }: Props) {
         </div>
 
         {/* ── Info panel ── */}
-        <div className="max-h-[42vh] lg:max-h-none lg:w-80 xl:w-96 flex-shrink-0 border-t lg:border-t-0 lg:border-l border-line bg-cream-2 flex flex-col">
-          <div className="flex-1 overflow-y-auto p-7 lg:p-8 space-y-6">
+        <div className="max-h-[42vh] sm:max-h-none sm:w-56 md:w-64 lg:w-80 xl:w-96 flex-shrink-0 border-t sm:border-t-0 sm:border-l border-line bg-cream-2 flex flex-col">
+          <div className="flex-1 overflow-y-auto p-4 sm:p-5 lg:p-8 space-y-4 sm:space-y-5 lg:space-y-6">
             <p className="text-[9px] tracking-[0.5em] uppercase text-gold">
               {getCategoryLabel(categories, project.category, lang)}
             </p>
