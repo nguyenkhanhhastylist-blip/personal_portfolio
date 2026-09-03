@@ -24,22 +24,9 @@ export default function ContactSection({ profile }: Props) {
             {lang === 'vi' ? 'Liên hệ' : 'Get in touch'}
           </h2>
           <div className="space-y-2.5">
-            {profile.email && (
-              <a
-                href={`mailto:${profile.email}`}
-                className="block font-ui font-medium text-[11px] tracking-[0.14em] uppercase text-ink-soft hover:text-ink transition-colors break-all"
-              >
-                {profile.email}
-              </a>
-            )}
-            {profile.phone && (
-              <a
-                href={`tel:${profile.phone.replace(/\./g, '')}`}
-                className="block font-ui font-medium text-[11px] tracking-[0.14em] uppercase text-ink-soft hover:text-ink transition-colors"
-              >
-                {profile.phone}
-              </a>
-            )}
+            <p className="font-ui font-medium text-[11px] tracking-[0.14em] uppercase text-ink-soft break-all">
+              nguyenkhanhhastylist@gmail.com
+            </p>
             <p className="font-ui font-light text-[14px] text-muted">Ho Chi Minh City, Vietnam</p>
           </div>
         </div>
@@ -73,6 +60,16 @@ export default function ContactSection({ profile }: Props) {
             {lang === 'vi' ? 'Kết nối' : 'Connect'}
           </p>
           <div className="space-y-2.5">
+            {profile.tiktok && (
+              <a
+                href={`https://tiktok.com/${profile.tiktok}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block font-ui font-medium text-[11px] tracking-[0.14em] uppercase text-ink-soft hover:text-ink transition-colors"
+              >
+                TikTok
+              </a>
+            )}
             {profile.instagram && (
               <a
                 href={`https://instagram.com/${profile.instagram}`}

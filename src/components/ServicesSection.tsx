@@ -5,7 +5,7 @@ const SERVICES = [
   {
     id: 'photoshoot',
     vi: {
-      title: 'Chụp hình & Hợp tác',
+      title: 'Chụp hình và Hợp tác',
       desc: 'Mỗi bức ảnh là một câu chuyện — mình mang đến phong cách độc đáo, phù hợp với concept và nhân vật, giúp tạo nên hình ảnh ấn tượng và nhất quán.',
     },
     en: {
@@ -18,7 +18,7 @@ const SERVICES = [
   {
     id: 'mv',
     vi: {
-      title: 'Tạo kiểu MV & Quảng cáo',
+      title: 'Tạo kiểu MV và Quảng cáo',
       desc: 'Hợp tác với nghệ sĩ và đội ngũ sản xuất để xây dựng hình ảnh nhân vật từ ý tưởng đến hiện thực — sáng tạo, chuyên nghiệp và đúng deadline.',
     },
     en: {
@@ -48,11 +48,37 @@ const SERVICES = [
       desc: 'Giúp bạn tìm ra phong cách riêng — từ việc chọn trang phục phù hợp vóc dáng, đến xây dựng tủ đồ capsule thể hiện đúng cá tính của bạn.',
     },
     en: {
-      title: 'Personal Styling',
+      title: 'Personal Styling & Consultation',
       desc: 'Helping you define your personal style — from selecting silhouettes that work for your figure, to building a capsule wardrobe that feels authentically you.',
     },
     image:
       'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=900&fit=crop&auto=format',
+  },
+  {
+    id: 'shopping',
+    vi: {
+      title: 'Personal Styling và Shopping',
+      desc: 'Tư vấn và mua sắm cùng bạn — từ xác định nhu cầu, lựa chọn item phù hợp đến hoàn thiện những outfit thực tế cho phong cách cá nhân.',
+    },
+    en: {
+      title: 'Personal Styling & Shopping',
+      desc: 'Shopping together with you — from identifying your needs and selecting the right pieces to completing real outfits for your personal style.',
+    },
+    image:
+      'https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&h=900&fit=crop&auto=format',
+  },
+  {
+    id: 'posing',
+    vi: {
+      title: 'Posing và Art Direction',
+      desc: 'Định hướng tạo dáng, biểu cảm và ngôn ngữ hình thể, kết hợp art direction để xây dựng hình ảnh đúng concept và tinh thần thương hiệu.',
+    },
+    en: {
+      title: 'Posing & Art Direction',
+      desc: 'Directing poses, expressions and body language, combined with art direction to build visuals that align with the concept and brand identity.',
+    },
+    image:
+      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200&h=900&fit=crop&auto=format',
   },
 ]
 
@@ -61,16 +87,12 @@ export default function ServicesSection() {
   const [active, setActive] = useState(0)
 
   const current = SERVICES[active]
-  const text = lang === 'en' ? current.en : current.vi
 
   return (
     <section id="services" className="bg-cream border-t border-line py-20 lg:py-28">
       <div className="px-[clamp(20px,4vw,64px)]">
         {/* Heading */}
         <div data-reveal className="mb-12 lg:mb-16">
-          <p className="font-ui font-medium text-[10.5px] tracking-[0.18em] uppercase text-gold mb-3">
-            {lang === 'vi' ? 'Dịch vụ' : 'Services'}
-          </p>
           <h2 className="font-display font-medium text-[clamp(28px,3.4vw,42px)] text-ink tracking-[-0.022em] leading-[1.08]">
             {lang === 'vi' ? 'Dịch vụ cung cấp' : 'What I provide'}
           </h2>
@@ -136,25 +158,6 @@ export default function ServicesSection() {
                         {t.desc}
                       </p>
                     </div>
-                    <svg
-                      width="14"
-                      height="14"
-                      viewBox="0 0 14 14"
-                      fill="none"
-                      className={`flex-shrink-0 mt-1 transition-all duration-300 ${
-                        isActive
-                          ? 'text-gold rotate-90'
-                          : 'text-ink-soft/30 group-hover:text-ink-soft/60'
-                      }`}
-                    >
-                      <path
-                        d="M7 1v12M1 7l6 6 6-6"
-                        stroke="currentColor"
-                        strokeWidth="1.2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
                   </div>
                 </button>
               )

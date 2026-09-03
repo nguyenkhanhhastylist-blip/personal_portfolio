@@ -537,8 +537,8 @@ export default function AdminPanel({
                   <FormField label={t('labelEmail')}>
                     <input type="email" value={localProfile.email} onChange={e => setLocalProfile(p => ({ ...p, email: e.target.value }))} className={inputCls} />
                   </FormField>
-                  <FormField label={t('labelPhone')}>
-                    <input type="text" value={localProfile.phone} onChange={e => setLocalProfile(p => ({ ...p, phone: e.target.value }))} className={inputCls} />
+                  <FormField label="TikTok">
+                    <input type="text" value={localProfile.tiktok} onChange={e => setLocalProfile(p => ({ ...p, tiktok: e.target.value }))} className={inputCls} />
                   </FormField>
                   <FormField label={t('labelInstagram')}>
                     <input type="text" value={localProfile.instagram} onChange={e => setLocalProfile(p => ({ ...p, instagram: e.target.value }))} className={inputCls} />

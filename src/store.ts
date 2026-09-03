@@ -55,7 +55,7 @@ export interface SiteProfile {
   bio2En: string
   profilePhoto: string
   email: string
-  phone: string
+  tiktok: string
   instagram: string
   facebook: string
 }
@@ -72,9 +72,9 @@ export const DEFAULT_PROFILE: SiteProfile = {
   bio2: 'Mình tin rằng thời trang là ngôn ngữ của sự tự tin và cá nhân hóa. Styling của mình hướng đến giúp khách hàng thể hiện rõ nét bản sắc riêng.',
   bio1En: "Hi! I'm Nguyen Khanh Ha (Pu90s), a stylist driven by a love of creativity and fashion. Over six years I have worked with brands and artists to build striking, character-rich imagery.",
   bio2En: 'I believe fashion is the language of confidence and individuality. My styling is about helping each client express who they really are.',
-  profilePhoto: '/images/main_pu.png',
-  email: 'nguyenthothangqt12@gmail.com',
-  phone: '0867.470.512',
+  profilePhoto: '/images/main_pu.jpeg',
+  email: 'nguyenkhanhhastylist@gmail.com',
+  tiktok: '@_ratmettt',
   instagram: 'Pu90s',
   facebook: 'https://www.facebook.com/ic.nguyen.16',
 }

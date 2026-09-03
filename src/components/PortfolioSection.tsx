@@ -46,9 +46,6 @@ export default function PortfolioSection({ projects, categories, onProjectClick 
     <section id="portfolio" className="py-20 lg:py-28 border-t border-line bg-cream">
       {/* Header */}
       <div data-reveal className="px-[clamp(20px,4vw,64px)] mb-12">
-        <p className="font-ui font-medium text-[10.5px] tracking-[0.18em] uppercase text-gold mb-3">
-          {lang === 'vi' ? 'Dự án' : 'Projects'}
-        </p>
         <h2 className="font-display text-lg sm:text-xl lg:text-2xl font-semibold uppercase text-ink tracking-wide">
           {lang === 'vi' ? 'DỰ ÁN' : 'PROJECTS'}
         </h2>
@@ -64,7 +61,7 @@ export default function PortfolioSection({ projects, categories, onProjectClick 
             <div key={cat.id} data-reveal>
               {/* Category label */}
               <div className="px-[clamp(20px,4vw,64px)] mb-5 flex items-center gap-4">
-                <span className="font-ui font-medium text-[10.5px] tracking-[0.18em] uppercase text-ink-soft">
+                <span className="font-ui font-bold text-[15px] tracking-[0.06em] uppercase text-ink">
                   {label}
                 </span>
                 <div className="flex-1 h-px bg-line" />
